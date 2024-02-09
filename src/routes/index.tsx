@@ -5,7 +5,9 @@ export default function Home() {
 	return (
 		<main>
 			<Title>Daniel Filat — Front End Engineer</Title>
-			<h1 class={css({ color: 'red.500' })}>Hi, I'm Daniel.</h1>
+			<h1 class={css({ fontFamily: 'mono', color: 'fg.subtle' })}>
+				Hi, I'm Daniel.
+			</h1>
 		</main>
 	)
 }
