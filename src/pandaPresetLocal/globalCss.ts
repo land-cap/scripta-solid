@@ -4,7 +4,6 @@ export const globalCss = defineGlobalStyles({
 	'*': {
 		'-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)',
 		cursor: 'default',
-		userSelect: 'none',
 	},
 	':focus-visible': {
 		outline: 'none',

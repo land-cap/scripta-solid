@@ -16,14 +16,16 @@ export const Hero = () => (
 				alignSelf: 'center',
 				fontFamily: 'mono',
 				fontSize: '6xl',
-				fontVariationSettings: '"wght" 1000',
+				fontVariationSettings: '"wght" 1100',
 				color: 'fg',
 			})}
 		>
 			<span>Hi, I'm Daniel.</span>
 			<br />
-			<span class={css({ color: 'accent' })}>
-				I design and build apps and interfaces.
+			<span class={css({ color: 'fg.subtle' })}>
+				I design and build apps
+				<br />
+				and interfaces.
 			</span>
 		</h1>
 	</section>

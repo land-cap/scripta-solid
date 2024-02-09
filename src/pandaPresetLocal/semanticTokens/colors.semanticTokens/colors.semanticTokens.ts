@@ -8,10 +8,4 @@ export const semanticColors = defineSemanticTokens.colors({
 	bg,
 	border,
 	fg,
-	accent: {
-		value: {
-			base: '{colors.electricBlue}',
-			_osDark: '{colors.electricYellow}',
-		},
-	},
 })
