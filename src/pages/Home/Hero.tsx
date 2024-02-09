@@ -22,7 +22,7 @@ export const Hero = () => (
 		>
 			<span>Hi, I'm Daniel.</span>
 			<br />
-			<span class={css({ color: 'electricBlue' })}>
+			<span class={css({ color: 'accent' })}>
 				I design and build apps and interfaces.
 			</span>
 		</h1>
