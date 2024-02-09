@@ -1,3 +1,3 @@
-import {definePreset} from "@pandacss/dev";
+import { definePreset } from '@pandacss/dev'
 
 export const pandaPresetLocal = definePreset({})
