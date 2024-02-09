@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-land-cap",
+  "type": "module",
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "vinxi dev --port 4100",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "dependencies": {
+    "@pandacss/preset-panda": "^0.30.2",
+    "@solidjs/meta": "^0.29.2",
+    "@solidjs/router": "^0.11.5",
+    "@solidjs/start": "^0.5.4",
+    "solid-js": "^1.8.14",
+    "vinxi": "^0.2.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.30.2"
+  }
+}
