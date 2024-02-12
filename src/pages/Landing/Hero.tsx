@@ -16,8 +16,8 @@ export const Hero = () => (
 				alignSelf: 'center',
 				fontFamily: 'mono',
 				fontSize: '7xl',
+				fontWeight: 'light',
 				lineHeight: '1.25',
-				fontVariationSettings: '"wght" 1100',
 				color: 'fg',
 			})}
 		>

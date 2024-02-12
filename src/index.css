@@ -1,8 +1,10 @@
+@import url('/fonts/fonts.css');
+
 @layer reset, base, tokens, recipes, utilities;
 
 @layer base {
     :root {
-        --font-sans: 'Geist Variable', sans-serif;
-        --font-mono: 'Geist Mono Variable', monospace;
+        --font-sans: ml, sans-serif;
+        --font-mono: ml, monospace;
     }
 }
