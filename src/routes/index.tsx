@@ -1,3 +1,3 @@
-import { Home } from '~/pages'
+import { Landing } from '~/pages'
 
-export default Home
+export default Landing

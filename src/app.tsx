@@ -14,7 +14,7 @@ export default function App() {
 		<Router
 			root={(props) => (
 				<MetaProvider>
-					<Title>Daniel Filat — Portfolio</Title>
+					<Title>Scripta</Title>
 					<Suspense>{props.children}</Suspense>
 				</MetaProvider>
 			)}

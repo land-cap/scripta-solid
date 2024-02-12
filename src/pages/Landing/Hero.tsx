@@ -21,13 +21,7 @@ export const Hero = () => (
 				color: 'fg',
 			})}
 		>
-			<span>Hi, I'm Daniel.</span>
-			<br />
-			<span class={css({ color: 'fg.subtle' })}>
-				I design and build apps
-				<br />
-				and interfaces.
-			</span>
+			How fast can you type?
 		</h1>
 	</section>
 )

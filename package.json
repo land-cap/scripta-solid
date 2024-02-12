@@ -1,9 +1,9 @@
 {
-  "name": "portfolio-land-cap",
+  "name": "scripta-solid",
   "type": "module",
   "scripts": {
     "prepare": "panda codegen",
-    "dev": "vinxi dev --port 4100",
+    "dev": "vinxi dev --port 4200",
     "build": "vinxi build",
     "start": "vinxi start",
     "lint": "pnpm eslint --fix ./src"

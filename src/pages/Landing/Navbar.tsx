@@ -17,7 +17,7 @@ export const Navbar = () => (
 					fontVariationSettings: '"wght" 900',
 				})}
 			>
-				Daniel Filat
+				scripta
 			</div>
 		</nav>
 	</div>
