@@ -1,27 +1,29 @@
 import { css } from 'styled-system/css'
+import { vstack } from 'styled-system/patterns'
 
 export const Hero = () => (
 	<section
-		class={css({
-			display: 'grid',
+		class={vstack({
+			justify: 'center',
 			h: 'dvh',
-			gridTemplateColumns: 'repeat(12,1fr)',
-			gridTemplateRows: 'repeat(12,1fr)',
 		})}
 	>
 		<h1
-			class={css({
+			class={vstack({
+				gap: '8',
 				gridColumn: '2 / -2',
 				gridRow: '6 / span 2',
 				alignSelf: 'center',
 				fontFamily: 'mono',
-				fontSize: '7xl',
-				fontWeight: 'light',
-				lineHeight: '1.25',
-				color: 'fg',
+				lineHeight: '1',
+				textAlign: 'center',
+				color: 'white',
 			})}
 		>
-			How fast can you type?
+			<span class={css({ fontSize: '4xl' })}>Do you wonder</span>
+			<span class={css({ fontSize: '7xl', opacity: '0.5' })}>
+				How fast can you type?
+			</span>
 		</h1>
 	</section>
 )

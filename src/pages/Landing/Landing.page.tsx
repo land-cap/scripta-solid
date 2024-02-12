@@ -6,7 +6,14 @@ export const Landing = () => {
 	return (
 		<>
 			<Navbar />
-			<main class={css({ bg: 'bg.canvas' })}>
+			<main
+				class={css({
+					bg: 'bg.canvas',
+					bgGradient: 'to-b',
+					gradientFrom: 'primary.900',
+					gradientTo: 'neutral.900',
+				})}
+			>
 				<Hero />
 			</main>
 		</>

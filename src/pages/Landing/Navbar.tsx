@@ -8,18 +8,18 @@ export const Navbar = () => (
 				column: 'content',
 				justify: 'space-between',
 				h: '20',
+				color: 'white',
 			})}
 		>
 			<div
 				class={css({
 					fontSize: '2xl',
 					fontWeight: 'black',
-					color: 'primary.500',
 				})}
 			>
 				scripta
 			</div>
-			<ul class={hstack()}>
+			<ul class={hstack({ gap: '8' })}>
 				<li>
 					<a>Donate</a>
 				</li>
