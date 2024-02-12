@@ -6,19 +6,27 @@ export const Navbar = () => (
 		<nav
 			class={hstack({
 				column: 'content',
+				justify: 'space-between',
 				h: '20',
-				borderBottomWidth: '4px',
-				borderColor: 'fg',
 			})}
 		>
 			<div
 				class={css({
 					fontSize: '2xl',
-					fontVariationSettings: '"wght" 900',
+					fontWeight: 'black',
+					color: 'primary.500',
 				})}
 			>
 				scripta
 			</div>
+			<ul class={hstack()}>
+				<li>
+					<a>Donate</a>
+				</li>
+				<li>
+					<a>Learn to type</a>
+				</li>
+			</ul>
 		</nav>
 	</div>
 )

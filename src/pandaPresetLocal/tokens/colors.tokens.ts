@@ -1,7 +1,9 @@
 import { defineTokens } from '@pandacss/dev'
+import pandaPreset from '@pandacss/preset-panda'
 
 export const colors = defineTokens.colors({
 	black: { value: '{colors.neutral.900}' },
 	white: { value: 'white' },
-	electricBlue: { value: '#0000ff' },
+	primary: pandaPreset.theme.tokens.colors.purple,
+	accent: pandaPreset.theme.tokens.colors.teal,
 })
