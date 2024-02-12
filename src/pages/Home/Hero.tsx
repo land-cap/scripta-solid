@@ -15,7 +15,8 @@ export const Hero = () => (
 				gridRow: '6 / span 2',
 				alignSelf: 'center',
 				fontFamily: 'mono',
-				fontSize: '6xl',
+				fontSize: '7xl',
+				lineHeight: '1.25',
 				fontVariationSettings: '"wght" 1100',
 				color: 'fg',
 			})}

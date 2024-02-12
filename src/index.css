@@ -2,7 +2,7 @@
 
 @layer base {
     :root {
-        --font-sans: 'Geist Sans Variable', sans-serif;
+        --font-sans: 'Geist Variable', sans-serif;
         --font-mono: 'Geist Mono Variable', monospace;
     }
 }
