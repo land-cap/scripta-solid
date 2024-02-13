@@ -1,5 +1,5 @@
 import { hstack, macrogrid } from 'styled-system/patterns'
-import { css } from 'styled-system/css'
+import { css, cx } from 'styled-system/css'
 import { button } from 'styled-system/recipes'
 
 export const Navbar = () => (
@@ -21,6 +21,16 @@ export const Navbar = () => (
 				scripta
 			</div>
 			<ul class={hstack({ gap: '0' })}>
+				<li>
+					<a
+						class={cx(
+							button({ onDark: true, visual: 'ghost' }),
+							css({ color: 'white/50' }),
+						)}
+					>
+						English
+					</a>
+				</li>
 				<li>
 					<a class={button({ onDark: true, visual: 'ghost' })}>Donate</a>
 				</li>

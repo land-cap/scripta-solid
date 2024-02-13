@@ -24,12 +24,11 @@ export const Hero = () => (
 			<span
 				class={css({
 					fontSize: '7xl',
-					fontWeight: 'black',
 					fontFamily: 'mono',
 				})}
 			>
 				<span class={css({ bg: 'white', color: 'black' })}>H</span>
-				<span class={css({ opacity: '0.5' })}>ow fast can you type?</span>
+				<span class={css({ opacity: '0.25' })}>ow fast can you type?</span>
 			</span>
 		</h1>
 	</section>
