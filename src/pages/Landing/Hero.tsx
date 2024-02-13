@@ -22,9 +22,14 @@ export const Hero = () => (
 		>
 			<span class={css({ fontSize: 'xl' })}>Do you wonder</span>
 			<span
-				class={css({ fontSize: '7xl', fontFamily: 'mono', opacity: '0.5' })}
+				class={css({
+					fontSize: '7xl',
+					fontWeight: 'black',
+					fontFamily: 'mono',
+				})}
 			>
-				how fast can you type?
+				<span class={css({ bg: 'white', color: 'black' })}>H</span>
+				<span class={css({ opacity: '0.5' })}>ow fast can you type?</span>
 			</span>
 		</h1>
 	</section>
