@@ -7,14 +7,14 @@ export const buttonRecipe = defineRecipe({
 		alignItems: 'center',
 		justifyContent: 'center',
 		px: '4',
-		fontWeight: 'bold',
+		h: '12',
 		lineHeight: '1',
 		transition: 'colors',
-		transitionDuration: 'fast',
+		transitionDuration: 'normal',
 		transitionTimingFunction: 'ease-out',
 		'& *': {
 			transition: 'colors',
-			transitionDuration: 'fast',
+			transitionDuration: 'normal',
 			transitionTimingFunction: 'ease-out',
 		},
 		'&[aria-disabled=true]': {
@@ -23,13 +23,7 @@ export const buttonRecipe = defineRecipe({
 	},
 	variants: {
 		visual: {
-			ghost: {
-				_active: { bg: 'bg.subtle', color: 'fg.subtle' },
-				_canHover: { _hover: { bg: 'bg.subtle' } },
-				'&[aria-disabled=true]': {
-					color: 'fg.moreFaded',
-				},
-			},
+			ghost: {},
 			solid: {
 				bg: 'bg.muted',
 				_active: { bg: 'bg.more_muted', color: 'fg.subtle' },
@@ -46,9 +40,47 @@ export const buttonRecipe = defineRecipe({
 				aspectRatio: 'square',
 			},
 		},
+		onDark: {
+			true: {},
+			false: {},
+		},
 	},
 	defaultVariants: {
 		visual: 'ghost',
 		icon: false,
 	},
+	compoundVariants: [
+		{
+			onDark: false,
+			visual: 'ghost',
+			css: {
+				_active: { bg: 'bg.subtle', color: 'fg.subtle' },
+				_canHover: { _hover: { bg: 'bg.subtle' } },
+				'&[aria-disabled=true]': {
+					color: 'fg.moreFaded',
+				},
+			},
+		},
+		{
+			onDark: true,
+			visual: 'ghost',
+			css: {
+				pos: 'relative',
+				color: 'white',
+				_after: {
+					content: '""',
+					pos: 'absolute',
+					inset: 0,
+					bg: 'white',
+					opacity: 0,
+				},
+				_active: { _after: { opacity: 0.1 } },
+				_canHover: {
+					_hover: {
+						_after: { opacity: 0.1 },
+					},
+				},
+			},
+		},
+	],
 })

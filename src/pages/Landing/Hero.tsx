@@ -14,15 +14,17 @@ export const Hero = () => (
 				gridColumn: '2 / -2',
 				gridRow: '6 / span 2',
 				alignSelf: 'center',
-				fontFamily: 'mono',
+
 				lineHeight: '1',
 				textAlign: 'center',
 				color: 'white',
 			})}
 		>
-			<span class={css({ fontSize: '4xl' })}>Do you wonder</span>
-			<span class={css({ fontSize: '7xl', opacity: '0.5' })}>
-				How fast can you type?
+			<span class={css({ fontSize: 'xl' })}>Do you wonder</span>
+			<span
+				class={css({ fontSize: '7xl', fontFamily: 'mono', opacity: '0.5' })}
+			>
+				how fast can you type?
 			</span>
 		</h1>
 	</section>
