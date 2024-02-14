@@ -6,6 +6,7 @@ export const Hero = () => (
 	<section
 		class={vstack({
 			justify: 'center',
+			gap: '8',
 			h: 'dvh',
 		})}
 	>
@@ -21,7 +22,7 @@ export const Hero = () => (
 				color: 'white',
 			})}
 		>
-			<span class={css({ fontSize: 'xl' })}>Are you wondering</span>
+			<span class={css({ fontSize: '2xl' })}>Are you wondering</span>
 		</h1>
 		<Console />
 	</section>

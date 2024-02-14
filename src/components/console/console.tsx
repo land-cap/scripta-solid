@@ -7,9 +7,7 @@ const [expectedText, setExpectedText] = createSignal('How fast can you type?')
 
 const [typedText, setTypedText] = createSignal('')
 
-const displayedText = createMemo(
-	() => `${typedText()}${expectedText().slice(typedText().length)}`,
-)
+const untypedText = createMemo(() => expectedText().slice(typedText().length))
 
 const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
 
@@ -25,10 +23,13 @@ createEffect(() => {
 const Caret = styled('div', {
 	base: {
 		pos: 'absolute',
+		boxSizing: 'content-box',
 		h: '1lh',
 		w: `1ch`,
 		borderWidth: '1px',
 		borderColor: 'white',
+		animation: 'pulse',
+		animationDuration: '1s',
 	},
 })
 
@@ -47,14 +48,15 @@ export const Console = () => {
 				pos: 'relative',
 				h: '1lh',
 				color: 'white/25',
-				fontSize: '7xl',
+				fontSize: '5xl',
 				fontFamily: 'mono',
 				lineHeight: '1.25',
 			})}
 		>
 			<Caret
 				style={{
-					left: `${charCount()}ch`,
+					display: untypedText().length ? 'block' : 'none',
+					left: `calc(${charCount()}ch - 1px)`,
 				}}
 			/>
 			<Input
@@ -66,9 +68,14 @@ export const Console = () => {
 				autoCapitalize={'off'}
 				autocorrect={'off'}
 				value={typedText()}
-				onInput={({ target: { value } }) => setTypedText(value)}
+				onInput={({ target: { value } }) =>
+					value.length <= expectedText().length && setTypedText(value)
+				}
 			/>
-			<Preview>{displayedText()}</Preview>
+			<Preview>
+				<styled.span css={{ color: 'white' }}>{typedText()}</styled.span>
+				{untypedText()}
+			</Preview>
 		</div>
 	)
 }
