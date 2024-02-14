@@ -1,5 +1,6 @@
 import { createEffect, createMemo, createSignal } from 'solid-js'
 import { css } from 'styled-system/css'
+import { styled } from 'styled-system/jsx'
 
 const [consoleText, setConsoleText] = createSignal('')
 
@@ -13,6 +14,10 @@ createEffect(() => {
 	})
 })
 
+const Caret = styled('div', {
+	base: { pos: 'absolute', h: '1lh', w: `1ch`, bg: 'white' },
+})
+
 export const Console = () => {
 	return (
 		<div
@@ -24,13 +29,7 @@ export const Console = () => {
 				lineHeight: '1.25',
 			})}
 		>
-			<div
-				class={css({
-					pos: 'absolute',
-					h: '1lh',
-					w: `1ch`,
-					bg: 'white',
-				})}
+			<Caret
 				style={{
 					left: `${charCount()}ch`,
 				}}
