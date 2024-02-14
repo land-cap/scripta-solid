@@ -21,16 +21,7 @@ export const Hero = () => (
 				color: 'white',
 			})}
 		>
-			<span class={css({ fontSize: 'xl' })}>Do you wonder</span>
-			<span
-				class={css({
-					fontSize: '7xl',
-					fontFamily: 'mono',
-				})}
-			>
-				<span class={css({ bg: 'white', color: 'black' })}>H</span>
-				<span class={css({ opacity: '0.25' })}>ow fast can you type?</span>
-			</span>
+			<span class={css({ fontSize: 'xl' })}>Are you wondering</span>
 		</h1>
 		<Console />
 	</section>

@@ -1,8 +1,9 @@
 import { createEffect, createMemo, createSignal } from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
+import { visuallyHidden } from 'styled-system/patterns'
 
-const [consoleText, setConsoleText] = createSignal('')
+const [consoleText, setConsoleText] = createSignal('How fast ca')
 
 const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
 
@@ -15,7 +16,21 @@ createEffect(() => {
 })
 
 const Caret = styled('div', {
-	base: { pos: 'absolute', h: '1lh', w: `1ch`, bg: 'white' },
+	base: {
+		pos: 'absolute',
+		h: '1lh',
+		w: `1ch`,
+		borderWidth: '1px',
+		borderColor: 'white',
+	},
+})
+
+const Input = styled('input', {
+	base: visuallyHidden.raw({ all: 'unset', pointerEvents: 'none' }),
+})
+
+const Preview = styled('p', {
+	base: { h: 'full', lineHeight: 'inherit' },
 })
 
 export const Console = () => {
@@ -23,6 +38,7 @@ export const Console = () => {
 		<div
 			class={css({
 				pos: 'relative',
+				h: '1lh',
 				color: 'white/25',
 				fontSize: '7xl',
 				fontFamily: 'mono',
@@ -34,13 +50,10 @@ export const Console = () => {
 					left: `${charCount()}ch`,
 				}}
 			/>
-			<input
-				ref={setInputEl}
+			<Input
+				ref={(el) => el.focus()}
 				class={css({
 					all: 'unset',
-					h: 'full',
-					lineHeight: 'inherit',
-					caretColor: 'transparent',
 				})}
 				type={'text'}
 				autoCapitalize={'off'}
@@ -48,6 +61,7 @@ export const Console = () => {
 				value={consoleText()}
 				onInput={({ target: { value } }) => setConsoleText(value)}
 			/>
+			<Preview>{consoleText()}</Preview>
 		</div>
 	)
 }
