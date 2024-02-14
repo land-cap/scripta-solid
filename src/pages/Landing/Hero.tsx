@@ -1,5 +1,6 @@
 import { css } from 'styled-system/css'
 import { vstack } from 'styled-system/patterns'
+import { Console } from '~/components'
 
 export const Hero = () => (
 	<section
@@ -31,5 +32,6 @@ export const Hero = () => (
 				<span class={css({ opacity: '0.25' })}>ow fast can you type?</span>
 			</span>
 		</h1>
+		<Console />
 	</section>
 )
