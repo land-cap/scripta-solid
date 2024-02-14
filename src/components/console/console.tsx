@@ -1,9 +1,11 @@
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createMemo, createSignal } from 'solid-js'
 import { css } from 'styled-system/css'
 
 const [consoleText, setConsoleText] = createSignal('')
 
 const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
+
+const charCount = createMemo(() => consoleText().length)
 
 createEffect(() => {
 	window.addEventListener('keyup', (e) => {
@@ -25,11 +27,13 @@ export const Console = () => {
 			<div
 				class={css({
 					pos: 'absolute',
-					left: '10ch',
 					h: '1lh',
-					w: '1ch',
+					w: `1ch`,
 					bg: 'white',
 				})}
+				style={{
+					left: `${charCount()}ch`,
+				}}
 			/>
 			<input
 				ref={setInputEl}
