@@ -1,44 +1,14 @@
-import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
 import { visuallyHidden } from 'styled-system/patterns'
-
-const [expectedText] = createSignal('How fast can you type?')
-
-const [typedText, setTypedText] = createSignal('')
-
-const untypedText = createMemo(() => expectedText().slice(typedText().length))
-
-const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
-
-const charCount = createMemo(() => typedText().length)
-
-const isComplete = createMemo(
-	() => expectedText().length === typedText().length,
-)
-
-createEffect(() => {
-	const handleBlur = () => inputEl()?.focus()
-
-	const handleKeyDown = (e: KeyboardEvent) => {
-		{
-			if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-				e.preventDefault()
-			}
-		}
-	}
-
-	if (inputEl()) {
-		inputEl()?.focus()
-		inputEl()?.addEventListener('blur', handleBlur)
-		inputEl()?.addEventListener('keydown', handleKeyDown)
-	}
-
-	onCleanup(() => {
-		inputEl()?.removeEventListener('blur', handleBlur)
-		inputEl()?.removeEventListener('keydown', handleKeyDown)
-	})
-})
+import {
+	charCount,
+	isComplete,
+	setInputEl,
+	setTypedText,
+	typedText,
+	untypedText,
+} from './console.logic'
 
 const ConsoleContainer = styled('div', {
 	base: {
