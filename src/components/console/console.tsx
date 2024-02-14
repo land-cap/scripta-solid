@@ -3,7 +3,7 @@ import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
 import { visuallyHidden } from 'styled-system/patterns'
 
-const [expectedText, setExpectedText] = createSignal('How fast can you type?')
+const [expectedText] = createSignal('How fast can you type?')
 
 const [typedText, setTypedText] = createSignal('')
 
@@ -13,11 +13,26 @@ const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
 
 const charCount = createMemo(() => typedText().length)
 
+const isComplete = createMemo(
+	() => expectedText().length === typedText().length,
+)
+
 createEffect(() => {
 	if (inputEl()) {
 		inputEl()?.focus()
 		inputEl()?.addEventListener('blur', () => inputEl()?.focus())
 	}
+})
+
+const ConsoleContainer = styled('div', {
+	base: {
+		pos: 'relative',
+		h: '1lh',
+		color: 'white/25',
+		fontSize: '5xl',
+		fontFamily: 'mono',
+		lineHeight: '1.25',
+	},
 })
 
 const Caret = styled('div', {
@@ -27,8 +42,11 @@ const Caret = styled('div', {
 		h: '1lh',
 		w: `1ch`,
 		borderWidth: '1px',
-		borderColor: 'white',
-		animation: 'pulse',
+		borderColor: 'white/50',
+		transition: 'all',
+		transitionDuration: 'faster',
+		transitionTimingFunction: 'ease-out',
+		animation: 'var(--animation)',
 		animationDuration: '1s',
 	},
 })
@@ -43,20 +61,12 @@ const Preview = styled('pre', {
 
 export const Console = () => {
 	return (
-		<div
-			class={css({
-				pos: 'relative',
-				h: '1lh',
-				color: 'white/25',
-				fontSize: '5xl',
-				fontFamily: 'mono',
-				lineHeight: '1.25',
-			})}
-		>
+		<ConsoleContainer>
 			<Caret
 				style={{
-					display: untypedText().length ? 'block' : 'none',
+					display: untypedText().length + 1 ? 'block' : 'none',
 					left: `calc(${charCount()}ch - 1px)`,
+					opacity: isComplete() ? 0 : 1,
 				}}
 			/>
 			<Input
@@ -68,14 +78,15 @@ export const Console = () => {
 				autoCapitalize={'off'}
 				autocorrect={'off'}
 				value={typedText()}
-				onInput={({ target: { value } }) =>
-					value.length <= expectedText().length && setTypedText(value)
-				}
+				disabled={isComplete()}
+				onInput={({ target: { value } }) => setTypedText(value)}
 			/>
 			<Preview>
-				<styled.span css={{ color: 'white' }}>{typedText()}</styled.span>
+				<styled.span css={{ h: '1lh', color: 'white' }}>
+					{typedText()}
+				</styled.span>
 				{untypedText()}
 			</Preview>
-		</div>
+		</ConsoleContainer>
 	)
 }
