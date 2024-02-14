@@ -1,4 +1,4 @@
-import { createEffect, createMemo, createSignal } from 'solid-js'
+import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
 import { visuallyHidden } from 'styled-system/patterns'
@@ -18,10 +18,26 @@ const isComplete = createMemo(
 )
 
 createEffect(() => {
+	const handleBlur = () => inputEl()?.focus()
+
+	const handleKeyDown = (e: KeyboardEvent) => {
+		{
+			if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+				e.preventDefault()
+			}
+		}
+	}
+
 	if (inputEl()) {
 		inputEl()?.focus()
-		inputEl()?.addEventListener('blur', () => inputEl()?.focus())
+		inputEl()?.addEventListener('blur', handleBlur)
+		inputEl()?.addEventListener('keydown', handleKeyDown)
 	}
+
+	onCleanup(() => {
+		inputEl()?.removeEventListener('blur', handleBlur)
+		inputEl()?.removeEventListener('keydown', handleKeyDown)
+	})
 })
 
 const ConsoleContainer = styled('div', {
@@ -40,7 +56,7 @@ const Caret = styled('div', {
 		pos: 'absolute',
 		boxSizing: 'content-box',
 		h: '1lh',
-		w: `1ch`,
+		w: '1ch',
 		borderWidth: '1px',
 		borderColor: 'white/50',
 		transition: 'all',
