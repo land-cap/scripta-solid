@@ -22,6 +22,23 @@ export const isComplete = createMemo(
 	() => expectedText().length === typedText().length,
 )
 
+export type TTypingError = {
+	index: number
+	char: string
+}
+
+export const mistypedLetterList = createMemo(() => {
+	const correctCharList = Array.from(typedTextCorrected())
+	const typedCharList = Array.from(typedText())
+	return typedCharList.reduce(
+		(acc, char, i) =>
+			correctCharList[i] !== char ? [...acc, { index: i, char }] : acc,
+		[] as TTypingError[],
+	)
+})
+
+createEffect(() => console.log(mistypedLetterList()))
+
 createEffect(() => {
 	const handleBlur = () => inputEl()?.focus()
 

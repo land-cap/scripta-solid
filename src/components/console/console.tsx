@@ -1,12 +1,15 @@
+import { For } from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
-import { visuallyHidden } from 'styled-system/patterns'
+import { center, visuallyHidden } from 'styled-system/patterns'
 import {
 	charCount,
 	isComplete,
 	isStandBy,
+	mistypedLetterList,
 	setInputEl,
 	setTypedText,
+	TTypingError,
 	typedText,
 	typedTextCorrected,
 	untypedText,
@@ -68,6 +71,21 @@ const Preview = styled('pre', {
 	},
 })
 
+const MistypedLetter = (props: { error: TTypingError }) => (
+	<styled.div
+		css={center.raw({
+			pos: 'absolute',
+			bottom: 0,
+			w: '1ch',
+			color: 'white/50',
+			transform: 'translateY(100%)',
+		})}
+		style={{ left: `calc(${props.error.index}ch - 1px)` }}
+	>
+		<styled.div css={{ fontSize: '2xl' }}>{props.error.char}</styled.div>
+	</styled.div>
+)
+
 export const Console = () => {
 	return (
 		<ConsoleContainer>
@@ -79,6 +97,9 @@ export const Console = () => {
 					opacity: isComplete() ? 0 : 1,
 				}}
 			/>
+			<For each={mistypedLetterList()}>
+				{(error) => <MistypedLetter error={error} />}
+			</For>
 			<Input
 				ref={setInputEl}
 				class={css({
