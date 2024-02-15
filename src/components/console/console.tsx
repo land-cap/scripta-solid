@@ -4,9 +4,11 @@ import { visuallyHidden } from 'styled-system/patterns'
 import {
 	charCount,
 	isComplete,
+	isStandBy,
 	setInputEl,
 	setTypedText,
 	typedText,
+	typedTextCorrected,
 	untypedText,
 } from './console.logic'
 
@@ -32,8 +34,24 @@ const Caret = styled('div', {
 		transition: 'all',
 		transitionDuration: 'faster',
 		transitionTimingFunction: 'ease-out',
-		animation: 'var(--animation)',
-		animationDuration: '1s',
+		'&:after': {
+			content: '""',
+			pos: 'absolute',
+			inset: 0,
+			transition: 'all',
+			transitionDuration: 'faster',
+			transitionTimingFunction: 'ease-out',
+			animation: 'blink 1.5s infinite',
+		},
+	},
+	variants: {
+		isStandBy: {
+			true: {
+				'&:after': {
+					bg: 'white',
+				},
+			},
+		},
 	},
 })
 
@@ -42,13 +60,19 @@ const Input = styled('input', {
 })
 
 const Preview = styled('pre', {
-	base: { h: 'full', lineHeight: 'inherit', fontFamily: 'mono' },
+	base: {
+		h: 'full',
+		whiteSpace: 'break-spaces',
+		lineHeight: 'inherit',
+		fontFamily: 'mono',
+	},
 })
 
 export const Console = () => {
 	return (
 		<ConsoleContainer>
 			<Caret
+				isStandBy={isStandBy()}
 				style={{
 					display: untypedText().length + 1 ? 'block' : 'none',
 					left: `calc(${charCount()}ch - 1px)`,
@@ -69,7 +93,7 @@ export const Console = () => {
 			/>
 			<Preview>
 				<styled.span css={{ h: '1lh', color: 'white' }}>
-					{typedText()}
+					{typedTextCorrected()}
 				</styled.span>
 				{untypedText()}
 			</Preview>

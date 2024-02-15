@@ -5,12 +5,18 @@ const [expectedText] = createSignal('How fast can you type?')
 export const [typedText, setTypedText] = createSignal('')
 
 export const untypedText = createMemo(() =>
-	expectedText().slice(typedText().length),
+	expectedText().substring(typedText().length),
+)
+
+export const typedTextCorrected = createMemo(() =>
+	expectedText().substring(0, typedText().length),
 )
 
 export const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
 
 export const charCount = createMemo(() => typedText().length)
+
+export const isStandBy = createMemo(() => !typedText().length)
 
 export const isComplete = createMemo(
 	() => expectedText().length === typedText().length,

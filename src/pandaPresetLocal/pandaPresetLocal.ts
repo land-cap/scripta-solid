@@ -19,6 +19,11 @@ export const pandaPresetLocal = definePreset({
 	theme: {
 		extend: {
 			keyframes: {
+				blink: {
+					'0%': { opacity: '0' },
+					'50%': { opacity: '1' },
+					'100%': { opacity: '0' },
+				},
 				fadeIn: {
 					'0%': { opacity: '0' },
 					'100%': { opacity: 'var(--opacity,1)' },
