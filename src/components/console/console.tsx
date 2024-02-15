@@ -19,7 +19,6 @@ const ConsoleContainer = styled('div', {
 	base: {
 		pos: 'relative',
 		h: '1lh',
-		color: 'white/25',
 		fontSize: '5xl',
 		fontFamily: 'mono',
 		lineHeight: '1.25',
@@ -51,7 +50,7 @@ const Caret = styled('div', {
 		isStandBy: {
 			true: {
 				'&:after': {
-					bg: 'white',
+					bg: 'white/50',
 				},
 			},
 		},
@@ -68,6 +67,7 @@ const Preview = styled('pre', {
 		whiteSpace: 'break-spaces',
 		lineHeight: 'inherit',
 		fontFamily: 'mono',
+		color: 'white/25',
 	},
 })
 
