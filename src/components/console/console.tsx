@@ -50,7 +50,7 @@ const Caret = styled('div', {
 		isStandBy: {
 			true: {
 				'&:after': {
-					bg: 'white/50',
+					bg: 'white/25',
 				},
 			},
 		},
@@ -79,6 +79,7 @@ const MistypedLetter = (props: { error: TTypingError }) => (
 			w: '1ch',
 			color: 'white/50',
 			transform: 'translateY(100%)',
+			animation: 'fadeIn 0.25s ease-out',
 		})}
 		style={{ left: `calc(${props.error.index}ch - 1px)` }}
 	>
