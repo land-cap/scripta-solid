@@ -1,4 +1,4 @@
-import { For } from 'solid-js'
+import { createMemo, For } from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
 import { center, visuallyHidden } from 'styled-system/patterns'
@@ -71,21 +71,26 @@ const Preview = styled('pre', {
 	},
 })
 
-const MistypedLetter = (props: { error: TTypingError }) => (
-	<styled.div
-		css={center.raw({
-			pos: 'absolute',
-			bottom: 0,
-			w: '1ch',
-			color: 'white/50',
-			transform: 'translateY(100%)',
-			animation: 'fadeIn 0.25s ease-out',
-		})}
-		style={{ left: `calc(${props.error.index}ch - 1px)` }}
-	>
-		<styled.div css={{ fontSize: '2xl' }}>{props.error.char}</styled.div>
-	</styled.div>
-)
+const MistypedLetter = (props: { error: TTypingError }) => {
+	const displayedChar = createMemo(() =>
+		props.error.char === ' ' ? '_' : props.error.char,
+	)
+
+	return (
+		<styled.div
+			css={center.raw({
+				pos: 'absolute',
+				bottom: 0,
+				w: '1ch',
+				color: 'white/50',
+				transform: 'translateY(100%)',
+			})}
+			style={{ left: `calc(${props.error.index}ch - 1px)` }}
+		>
+			<styled.div css={{ fontSize: '2xl' }}>{displayedChar()}</styled.div>
+		</styled.div>
+	)
+}
 
 export const Console = () => {
 	return (
