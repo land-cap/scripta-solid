@@ -1,6 +1,6 @@
 import { createEffect, createMemo, createSignal, onCleanup } from 'solid-js'
 
-const [expectedText] = createSignal('how fast can you type?')
+const [expectedText] = createSignal('How fast can you type?')
 
 export const [typedText, setTypedText] = createSignal('')
 
