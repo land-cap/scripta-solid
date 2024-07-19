@@ -6,12 +6,12 @@ import {
 	charCount,
 	isComplete,
 	isStandBy,
-	mistypedLetterList,
+	mistypedCharList,
 	setInputEl,
 	setTypedText,
 	TTypingError,
+	typedCharList,
 	typedText,
-	typedTextCorrected,
 	untypedText,
 } from './console.logic'
 
@@ -71,6 +71,16 @@ const Preview = styled('pre', {
 	},
 })
 
+const TypedChar = styled('span', {
+	variants: {
+		mistyped: {
+			true: {
+				color: 'rose.400',
+			},
+		},
+	},
+})
+
 const MistypedLetter = (props: { error: TTypingError }) => {
 	const displayedChar = createMemo(() =>
 		props.error.char === ' ' ? '_' : props.error.char,
@@ -93,17 +103,19 @@ const MistypedLetter = (props: { error: TTypingError }) => {
 }
 
 export const Console = () => {
+	const hasFinishedTyping = createMemo(() => untypedText().length + 1)
+
 	return (
 		<ConsoleContainer>
 			<Caret
 				isStandBy={isStandBy()}
 				style={{
-					display: untypedText().length + 1 ? 'block' : 'none',
+					display: hasFinishedTyping() ? 'block' : 'none',
 					left: `calc(${charCount()}ch - 1px)`,
 					opacity: isComplete() ? 0 : 1,
 				}}
 			/>
-			<For each={mistypedLetterList()}>
+			<For each={mistypedCharList()}>
 				{(error) => <MistypedLetter error={error} />}
 			</For>
 			<Input
@@ -120,7 +132,11 @@ export const Console = () => {
 			/>
 			<Preview>
 				<styled.span css={{ h: '1lh', color: 'white' }}>
-					{typedTextCorrected()}
+					<For each={typedCharList()}>
+						{({ char, isMistyped }) => (
+							<TypedChar mistyped={isMistyped}>{char}</TypedChar>
+						)}
+					</For>
 				</styled.span>
 				{untypedText()}
 			</Preview>

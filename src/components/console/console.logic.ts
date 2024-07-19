@@ -27,17 +27,22 @@ export type TTypingError = {
 	char: string
 }
 
-export const mistypedLetterList = createMemo(() => {
-	const correctCharList = Array.from(typedTextCorrected())
-	const typedCharList = Array.from(typedText())
-	return typedCharList.reduce(
-		(acc, char, i) =>
-			correctCharList[i] !== char ? [...acc, { index: i, char }] : acc,
-		[] as TTypingError[],
-	)
+export const typedCharList = createMemo(() => {
+	const correctCharList = [...typedTextCorrected()]
+	const typedCharList = [...typedText()]
+	return typedCharList.map((char, index) => ({
+		char,
+		isMistyped: correctCharList[index] !== char,
+	}))
 })
 
-createEffect(() => console.log(mistypedLetterList()))
+export const mistypedCharList = createMemo(() =>
+	typedCharList().reduce(
+		(acc, { char, isMistyped }, index) =>
+			isMistyped ? [...acc, { index, char }] : acc,
+		[] as TTypingError[],
+	),
+)
 
 createEffect(() => {
 	const handleBlur = () => inputEl()?.focus()
