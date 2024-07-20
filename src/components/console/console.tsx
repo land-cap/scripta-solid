@@ -1,17 +1,22 @@
-import { createMemo, For } from 'solid-js'
+import {
+	createEffect,
+	createMemo,
+	createSignal,
+	For,
+	onCleanup,
+} from 'solid-js'
 import { css } from 'styled-system/css'
 import { styled } from 'styled-system/jsx'
 import { center, visuallyHidden } from 'styled-system/patterns'
 import {
-	charCount,
-	isComplete,
-	isStandBy,
-	mistypedCharList,
-	setInputEl,
+	hasCompletedTest,
+	isInStandBy,
 	setTypedText,
 	TTypingError,
+	typedCharCount,
 	typedCharList,
 	typedText,
+	typingErrorList,
 	untypedText,
 } from './console.logic'
 
@@ -103,19 +108,41 @@ const MistypedLetter = (props: { error: TTypingError }) => {
 }
 
 export const Console = () => {
-	const hasFinishedTyping = createMemo(() => untypedText().length + 1)
+	const [inputEl, setInputEl] = createSignal<HTMLInputElement | null>(null)
+
+	createEffect(() => {
+		const handleBlur = () => inputEl()?.focus()
+
+		const handleKeyDown = (e: KeyboardEvent) => {
+			{
+				if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+					e.preventDefault()
+				}
+			}
+		}
+
+		if (inputEl()) {
+			inputEl()?.focus()
+			inputEl()?.addEventListener('blur', handleBlur)
+			inputEl()?.addEventListener('keydown', handleKeyDown)
+		}
+
+		onCleanup(() => {
+			inputEl()?.removeEventListener('blur', handleBlur)
+			inputEl()?.removeEventListener('keydown', handleKeyDown)
+		})
+	})
 
 	return (
 		<ConsoleContainer>
 			<Caret
-				isStandBy={isStandBy()}
+				isStandBy={isInStandBy()}
 				style={{
-					display: hasFinishedTyping() ? 'block' : 'none',
-					left: `calc(${charCount()}ch - 1px)`,
-					opacity: isComplete() ? 0 : 1,
+					left: `calc(${typedCharCount()}ch - 1px)`,
+					opacity: hasCompletedTest() ? 0 : 1,
 				}}
 			/>
-			<For each={mistypedCharList()}>
+			<For each={typingErrorList()}>
 				{(error) => <MistypedLetter error={error} />}
 			</For>
 			<Input
@@ -127,7 +154,7 @@ export const Console = () => {
 				autoCapitalize={'off'}
 				autocorrect={'off'}
 				value={typedText()}
-				disabled={isComplete()}
+				disabled={hasCompletedTest()}
 				onInput={({ target: { value } }) => setTypedText(value)}
 			/>
 			<Preview>
