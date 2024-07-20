@@ -1,4 +1,5 @@
 import { createMemo, createSignal } from 'solid-js'
+import { signalFamily } from '~/utils'
 
 const [textToType] = createSignal('How fast can you type?')
 
@@ -27,6 +28,8 @@ export type TTypingError = {
 	index: number
 	char: string
 }
+
+const typingErrorFamily = signalFamily<number, string | null>(() => null)
 
 export const typingErrorList = createMemo(() =>
 	typedCharList().reduce(
